@@ -9,9 +9,9 @@ st.set_page_config(page_title="Core Signal Engine Pro", layout="centered")
 
 st.markdown(
     "<h1 style='text-align: center; color: #00e676; margin-bottom: 0;'>🎯 CORE SIGNAL ENGINE PRO</h1>", 
-    unsafe_style_html=True
+    unsafe_allow_html=True
 )
-st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 14px;'>Advanced Real-Time Institutional Liquidity Analytics</p>", unsafe_style_html=True)
+st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 14px;'>Advanced Real-Time Institutional Liquidity Analytics</p>", unsafe_allow_html=True)
 
 # 1. Expanded Asset Selection Menu (Adding Gold and Key Forex Pairs)
 asset_display = st.selectbox(
@@ -60,7 +60,7 @@ if "last_asset" not in st.session_state or st.session_state.last_asset != select
 
 # 3. Live High-Frequency Liquidity Connection Pipeline
 try:
-    status_placeholder.markdown("<div style='color:#38bdf8; text-align:center;'>🔄 Connecting to live data engine...</div>", unsafe_style_html=True)
+    status_placeholder.markdown("<div style='color:#38bdf8; text-align:center;'>🔄 Connecting to live data engine...</div>", unsafe_allow_html=True)
     
     # Using public low-latency institutional currency streams
     feed_url = f"https://binance.com{selected_symbol}"
@@ -93,7 +93,7 @@ try:
 
     # 4. Render Live Technical Interface Elements
     current_time_str = datetime.now().strftime("%H:%M:%S")
-    status_placeholder.markdown(f"<div style='color:#22c55e; text-align:center;'>🟢 Live Connection Connected | Clock: <b>{current_time_str}</b></div>", unsafe_style_html=True)
+    status_placeholder.markdown(f"<div style='color:#22c55e; text-align:center;'>🟢 Live Connection Connected | Clock: <b>{current_time_str}</b></div>", unsafe_allow_html=True)
 
     if len(st.session_state.price_records) >= 15:
         metrics = process_indicators(st.session_state.price_records)
@@ -108,7 +108,7 @@ try:
                 "<div style='background-color:#052e16; padding:20px; border-radius:12px; text-align:center; border:2px solid #22c55e; margin-bottom:15px;'>"
                 "<h2 style='color:#22c55e; margin:0; font-size:24px;'>🟢 HIGH ACCURACY CALL / BUY SIGNAL</h2>"
                 f"<p style='color:white; margin:8px 0 0 0; font-size:15px;'>Asset: <b>{asset_display}</b><br>Execution Frame: <b>Immediate (1-3 Min Expiry)</b><br>Target Entry Window: <b>{live_price:.4f}</b></p>"
-                "</div>", unsafe_style_html=True
+                "</div>", unsafe_allow_html=True
             )
         # High Accuracy Overbought Strategy Matrix
         elif rsi_val > 68 and ema_f < ema_s:
@@ -116,14 +116,14 @@ try:
                 "<div style='background-color:#450a0a; padding:20px; border-radius:12px; text-align:center; border:2px solid #ef4444; margin-bottom:15px;'>"
                 "<h2 style='color:#ef4444; margin:0; font-size:24px;'>🔴 HIGH ACCURACY PUT / SELL SIGNAL</h2>"
                 f"<p style='color:white; margin:8px 0 0 0; font-size:15px;'>Asset: <b>{asset_display}</b><br>Execution Frame: <b>Immediate (1-3 Min Expiry)</b><br>Target Entry Window: <b>{live_price:.4f}</b></p>"
-                "</div>", unsafe_style_html=True
+                "</div>", unsafe_allow_html=True
             )
         else:
             signal_placeholder.markdown(
                 "<div style='background-color:#1e293b; padding:15px; border-radius:12px; text-align:center; margin-bottom:15px;'>"
                 "<h4 style='color:#94a3b8; margin:0; letter-spacing:1px;'>⏳ SCANNING MATHEMATICAL MATRIX...</h4>"
                 "<p style='color:#64748b; font-size:12px; margin:4px 0 0 0;'>Conditions Neutral. Awaiting precise structural market breakout.</p>"
-                "</div>", unsafe_style_html=True
+                "</div>", unsafe_allow_html=True
             )
 
         # RENDER REAL-TIME INTERACTIVE LINE CHART
@@ -145,7 +145,7 @@ try:
         chart_placeholder.line_chart(chart_df, height=220, use_container_width=True)
 
 except Exception as data_err:
-    status_placeholder.markdown(f"<div style='color:#ef4444; text-align:center;'>⚠️ Network latency detected. Reconnecting feed module...</div>", unsafe_style_html=True)
+    status_placeholder.markdown(f"<div style='color:#ef4444; text-align:center;'>⚠️ Network latency detected. Reconnecting feed module...</div>", unsafe_allow_html=True)
 
 # Fast live interface heartbeat looping mechanism
 time.sleep(2)
